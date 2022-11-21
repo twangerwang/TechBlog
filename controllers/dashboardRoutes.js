@@ -6,13 +6,13 @@ router.get("/", withAuth, async (req, res) => {
   try {
     const userPosts = await Post.findAll({
       where: {
-        userId: req.session.userId,
+        userId: req.session.user_id,
       },
     });
     const posts = userPosts.map((post) => post.get({ plain: true }));
     res.render("profile", {
       posts,
-      loggedIn: req.session.loggedIn,
+      loggedIn: req.session.logged_in,
     });
   } catch (err) {
     res.redirect("login");
