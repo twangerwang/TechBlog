@@ -1,0 +1,31 @@
+[
+    {
+        "userName": "spongebob",
+        "password": "spongebob"
+    },
+    {
+        "userName": "patrick",
+        "password": "patrick"
+    },
+    {
+        "userName": "sandy",
+        "password": "sandy"
+    },
+    {
+        "userName": "squidward",
+        "password": "squidward"
+    },
+    {
+        "userName": "mrkrabs",
+        "password": "mrkrabs"
+    },
+    {
+        "userName": "plankton",
+        "password": "plankton"
+
+    },
+    {
+        "userName": "gary",
+        "password": "gary"
+    }
+]

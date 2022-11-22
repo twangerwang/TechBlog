@@ -9,16 +9,16 @@ router.get("/", async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ["name"],
+          attributes: ["userName"],
         },
       ],
     });
     // Serialize data so the template can read it
-    const postss = allPost.map((post) => post.get({ plain: true }));
+    const post = allPost.map((post) => post.get({ plain: true }));
     // Pass serialized data and session flag into template
     res.render("homepage", {
-      posts,
-      logged_in: req.session.logged_in,
+      post,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -38,9 +38,9 @@ router.get("/posts/:id", async (req, res) => {
     });
 
     const thisPost = post.get({ plain: true });
-    res.render("onePost", {
+    res.render("newPost", {
       ...thisPost,
-      logged_in: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -49,7 +49,7 @@ router.get("/posts/:id", async (req, res) => {
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
@@ -57,7 +57,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  if (req.session.logged_in) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }

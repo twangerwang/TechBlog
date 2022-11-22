@@ -6,13 +6,13 @@ router.get("/", withAuth, async (req, res) => {
   try {
     const userPosts = await Post.findAll({
       where: {
-        userId: req.session.user_id,
+        userId: req.session.userId,
       },
     });
     const posts = userPosts.map((post) => post.get({ plain: true }));
     res.render("profile", {
       posts,
-      loggedIn: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.redirect("login");
@@ -21,7 +21,7 @@ router.get("/", withAuth, async (req, res) => {
 
 router.get("/newpost", withAuth, (req, res) => {
   res.render("newPost", {
-    logged_in: req.session.logged_in,
+    loggedIn: req.session.loggedIn,
   });
 });
 
@@ -32,7 +32,7 @@ router.get("/edit/:id", withAuth, async (req, res) => {
       const post = postData.get({ plain: true });
       res.render("edit", {
         post,
-        logged_in: req.session.logged_in,
+        loggedIn: req.session.loggedIn,
       });
     } else {
       res.status(404).end();

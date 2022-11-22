@@ -10,7 +10,6 @@ const session = require("express-session");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const morganLogger = require("morgan");
 
 // Initialize browser session the app
 const sess = {
@@ -32,9 +31,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.use(routes);
-
-// Setup morgan middleware to log HTTP requests and errors.
-app.use(morganLogger("dev"));
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on PORT ${PORT}`));
