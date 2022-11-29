@@ -25,6 +25,7 @@ router.post("/", async (req, res) => {
 //Login already created user
 router.post("/login", async (req, res) => {
   try {
+    console.log(req.body.userName);
     const userData = await User.findOne({
       where: { userName: req.body.userName },
     });
@@ -45,6 +46,7 @@ router.post("/login", async (req, res) => {
       req.session.userId = userData.id;
       req.session.userName = userData.userName;
       req.session.loggedIn = true;
+      console.log(userData);
 
       res.json({ user: userData, message: "You are now logged in!" });
     });
